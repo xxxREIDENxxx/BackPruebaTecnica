@@ -30,12 +30,18 @@ public class PedidoServiceImpl implements PedidoService{
 		return pedidoRepository.findByUser_id(id);
 	}
 	
-	/*@Override
+	@Override
 	@Transactional(readOnly = true)
-	public Iterable<Pedido> findPedidoForDate(LocalDate id) {
+	public Iterable<Pedido> getFecha(LocalDate inicial, LocalDate finalizar) {
 		
-		return pedidoRepository.findByLocalDate(id);
-	}*/
+		return pedidoRepository.getFecha(inicial, finalizar );
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Iterable<Pedido> getEstado(Boolean estado){
+		return pedidoRepository.getEstado(estado );
+	}
 
 	@Override
 	@Transactional(readOnly = true)
