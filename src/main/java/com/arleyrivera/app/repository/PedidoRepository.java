@@ -16,6 +16,12 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 	
 	//public List<Pedido> findByLocalDate (LocalDate date);
 	
-	//@Query("select u from Pedidos u where u.fecha >= fechaIncio And fechaFinal <= ")
-	//public List<Pedido> getDistributor(); 
+	@Query(value = "select * from pedidos u where u.fecha BETWEEN :inicial and :finalizar", nativeQuery = true)
+	public List<Pedido> getFecha(LocalDate inicial, LocalDate finalizar); 
+	
+	@Query(value = "select * from pedidos u where u.estado = :estado ", nativeQuery = true)
+	public List<Pedido> getEstado(Boolean estado); 
+	
+	//select * from pedidos u where u.fecha >= :inicial AND u.fecha <= :finalizar
+	//public List<Pedido> findAllByFechaLessThanEqualAndFechaGreaterThanEqual(OffsetDateTime endDate, OffsetDateTime startDate);
 }

@@ -1,6 +1,11 @@
 package com.arleyrivera.app.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -45,11 +50,25 @@ public class PedidoController {
 		return (List<Pedido>) pedidoService.findPedidoForUser(id);
 	}
 	
-	/*@GetMapping(path = "/buscar/{date}")
-	public List <Pedido> readAListUser(@PathVariable(value = "date") LocalDate date){
+	@GetMapping(path = "/buscar/{date1}/{date2}")
+	public List <Pedido> readAListUser(@PathVariable(value = "date1") String date1, @PathVariable(value = "date2") String date2 ) throws ParseException{
+		//OffsetDateTime fecha1 = OffsetDateTime.parse(date1, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		//OffsetDateTime fecha2 = OffsetDateTime.parse(date2, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	  // Convert String to LocalDateTime using LocalDate's parse() method
+	     LocalDate fecha1 = LocalDate.parse(date1,dateTimeFormatter);
+	     LocalDate fecha2 = LocalDate.parse(date2,dateTimeFormatter);
+	     
+	     
+		System.out.print(fecha1 + "/" + fecha2);
+		return (List<Pedido>) pedidoService.getFecha(fecha1, fecha2);
+	}
 	
-		return (List<Pedido>) pedidoService.findPedidoForDate(date);
-	}*/
+	@GetMapping(path = "/estado/{estado}")
+	public List <Pedido> getEstado(@PathVariable(value = "estado") Boolean estado){
+	
+		return (List<Pedido>) pedidoService.getEstado(estado);
+	}
 	
 	
 	// create a new delivery

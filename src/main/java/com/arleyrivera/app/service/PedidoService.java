@@ -1,6 +1,9 @@
 package com.arleyrivera.app.service;
 
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -16,7 +19,9 @@ public interface PedidoService {
 	
 	public Iterable<Pedido> findPedidoForUser(Long id);
 	
-	//public Iterable<Pedido> findPedidoForDate(LocalDate id);
+	public Iterable<Pedido> getFecha(LocalDate inicial ,LocalDate finalizar);
+	
+	public Iterable<Pedido> getEstado(Boolean estado); 
 
 	public Optional<Pedido> findById(Long id);
 	
